@@ -1,6 +1,7 @@
 var oldTxt = 'OLD';
 var newTxt = 'NEW';
 var inputName = 'original';
+var outputName = 'new';
 
 var XLSX = require('xlsx'); // require the module
 
@@ -8,7 +9,7 @@ var fs = require('fs');
 
 function findReplace() {
   /* read the file */
-  var workbook = XLSX.readFile(`${inputName}.xlsx`); // parse the file
+  var workbook = XLSX.readFile(`${outputName}.xlsx`); // parse the file
   var sheetNames = workbook.SheetNames;
 
   sheetNames.forEach(function (y) {
@@ -37,12 +38,12 @@ function findReplace() {
     }
   });
 
-  XLSX.writeFile(workbook, 'new.xlsx');
+  XLSX.writeFile(workbook, `${outputName}.xlsx`);
 }
 
 // new.txt will be created or overwritten by default.
-fs.copyFile(`${inputName}.xlsx`, 'new.xlsx', (err) => {
+fs.copyFile(`${inputName}.xlsx`, `${outputName}.xlsx`, (err) => {
   if (err) throw err;
-  console.log(`${inputName}.xlsx was copied to new.xlsx`);
+  console.log(`${inputName}.xlsx was copied to ${outputName}.xlsx`);
   findReplace();
 });

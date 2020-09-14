@@ -1,6 +1,12 @@
 {
-  "name": "xlsx_editer",
+  "name": "xlsx-editer",
   "version": "1.0.0",
   "main": "index.js",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "xlsx": "^0.16.7"
+  },
+  "engines": {
+    "node": ">=12"
+  }
 }

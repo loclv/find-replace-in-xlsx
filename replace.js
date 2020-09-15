@@ -12,7 +12,7 @@ const inputName = process.env.INPUT_NAME;
 const outputName = process.env.OUTPUT_NAME;
 
 function findReplace(dict) {
-  const workbook = XLSX.fromFileAsync(`./${outputName}.xlsx`).then(
+  const workbook = XLSX.fromFileAsync(`./${inputName}.xlsx`).then(
     (workbook) => {
       for (let key in dict) {
         let oldTxt = key.toString();
@@ -22,15 +22,19 @@ function findReplace(dict) {
         workbook.find(regex, (match) => newTxt);
       }
 
+      // new.txt will be created or overwritten by default.
       workbook.toFileAsync(`${outputName}.xlsx`);
     },
   );
 }
 
 // new.txt will be created or overwritten by default.
-fs.copyFile(`${inputName}.xlsx`, `${outputName}.xlsx`, (err) => {
-  if (err) throw err;
-  console.log(`${inputName}.xlsx was copied to ${outputName}.xlsx`);
-  const dict = getDict(DICT_NAME);
-  findReplace(dict);
-});
+// fs.copyFile(`${inputName}.xlsx`, `${outputName}.xlsx`, (err) => {
+//   if (err) throw err;
+//   console.log(`${inputName}.xlsx was copied to ${outputName}.xlsx`);
+//   const dict = getDict(DICT_NAME);
+//   findReplace(dict);
+// });
+
+const dict = getDict(DICT_NAME);
+findReplace(dict);

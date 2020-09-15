@@ -28,13 +28,5 @@ function findReplace(dict) {
   );
 }
 
-// new.txt will be created or overwritten by default.
-// fs.copyFile(`${inputName}.xlsx`, `${outputName}.xlsx`, (err) => {
-//   if (err) throw err;
-//   console.log(`${inputName}.xlsx was copied to ${outputName}.xlsx`);
-//   const dict = getDict(DICT_NAME);
-//   findReplace(dict);
-// });
-
 const dict = getDict(DICT_NAME);
 findReplace(dict);

@@ -1,13 +1,15 @@
 'use strict';
 
 const XLSX = require('xlsx');
-
 const fs = require('fs');
+const dotenv = require('dotenv');
 
-const oldTxt = 'OLD';
-const newTxt = 'NEW';
-const inputName = 'original';
-const outputName = 'new';
+dotenv.config();
+
+const oldTxt = process.env.OLD_TXT;
+const newTxt = process.env.NEW_TXT;
+const inputName = process.env.INPUT_NAME;
+const outputName = process.env.OUTPUT_NAME;
 
 function findReplace() {
   /* read the file */

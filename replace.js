@@ -15,29 +15,17 @@ function readWrite() {
   workbook.xlsx
     .readFile(`${outputName}.xlsx`)
     .then(function () {
-      let sheetNames = workbook.SheetNames;
-
-      sheetNames.forEach(function (y) {
-        let sheet = workbook.Sheets[y];
-
-        let range = XLSX.utils.decode_range(sheet['!ref']);
-
-        for (let R = range.s.r; R <= range.e.r; ++R) {
-          for (let C = range.s.c; C <= range.e.c; ++C) {
-            let cellRef = XLSX.utils.encode_cell({c: C, r: R});
-            // if cell doesn't exist, move on
-            if (!sheet[cellRef]) continue;
-
-            let cell = sheet[cellRef];
-            // skip if cell is not text
-            if ((cell.t !== 's' && cell.t !== 'str') || !cell.v) continue;
-
-            let v = cell.v;
+      workbook.eachSheet(function (worksheet, sheetId) {
+        worksheet.eachRow(function (row, rowNumber) {
+          row.eachCell(function (cell, colNumber) {
+            let v = cell.value;
             let regex = new RegExp(oldTxt, 'g');
             // if the cell is a text cell with the old string, change it
-            if (v.includes(oldTxt)) cell.v = v.replace(regex, newTxt);
-          }
-        }
+            if (v.includes(oldTxt)) cell.value = v.replace(regex, newTxt);
+          });
+          // Commit a completed row to stream
+          row.commit();
+        });
       });
 
       workbook.xlsx

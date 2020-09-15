@@ -3,7 +3,7 @@ var newTxt = 'NEW';
 var inputName = 'original';
 var outputName = 'new';
 
-var XLSX = require('xlsx'); // require the module
+var XLSX = require('xlsx');
 
 var fs = require('fs');
 
@@ -13,7 +13,7 @@ function findReplace() {
   var sheetNames = workbook.SheetNames;
 
   sheetNames.forEach(function (y) {
-    var sheet = workbook.Sheets[y]; // get the first worksheet
+    var sheet = workbook.Sheets[y];
 
     /* loop through every cell manually */
     var range = XLSX.utils.decode_range(sheet['!ref']); // get the range
@@ -32,8 +32,7 @@ function findReplace() {
         var v = cell.v;
         var regex = new RegExp(oldTxt, 'g');
 
-        // find and replace
-        if (v.includes(oldTxt)) cell.v = v.replace(regex, newTxt); // change the cell value
+        if (v.includes(oldTxt)) cell.v = v.replace(regex, newTxt);
       }
     }
   });

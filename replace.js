@@ -19,12 +19,14 @@ function readDict() {
     console.log(dict);
 
     console.log(`Read ./${DICT_NAME}.yaml`);
+
+    return dict;
   } catch (e) {
     console.log(e);
   }
 }
 
-function findReplace() {
+function findReplace(dict) {
   /* read the file */
   const workbook = XLSX.readFile(`${outputName}.xlsx`); // parse the file
   const sheetNames = workbook.SheetNames;
@@ -49,8 +51,11 @@ function findReplace() {
         let v = cell.v;
 
         for (let key in dict) {
-          let oldTxt = key;
-          let newTxt = dict[key];
+          let oldTxt = key.toString();
+          let newTxt = dict[key].toString();
+          console.log(oldTxt);
+          console.log(newTxt);
+
           let regex = new RegExp(oldTxt, 'g');
           if (v.includes(oldTxt)) cell.v = v.replace(regex, newTxt);
         }
@@ -65,6 +70,6 @@ function findReplace() {
 fs.copyFile(`${inputName}.xlsx`, `${outputName}.xlsx`, (err) => {
   if (err) throw err;
   console.log(`${inputName}.xlsx was copied to ${outputName}.xlsx`);
-  readDict();
-  findReplace();
+  const dict = readDict();
+  findReplace(dict);
 });

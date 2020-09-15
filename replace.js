@@ -1,6 +1,6 @@
 'use strict';
 
-const XLSX = require('xlsx');
+const XLSX = require('xlsx-style');
 const fs = require('fs');
 const dotenv = require('dotenv');
 

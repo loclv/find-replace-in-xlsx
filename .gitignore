@@ -2,3 +2,4 @@
 *.xlsm
 node_modules/
 .env
+.env.production

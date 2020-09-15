@@ -14,9 +14,10 @@ const outputName = process.env.OUTPUT_NAME;
 function readDict() {
   try {
     let fileContents = fs.readFileSync(`./${DICT_NAME}.yaml`, 'utf8');
-    let data = yaml.load(fileContents);
+    const dict = yaml.load(fileContents);
 
-    console.log(data);
+    console.log(dict);
+
     console.log(`Read ./${DICT_NAME}.yaml`);
   } catch (e) {
     console.log(e);
@@ -46,9 +47,13 @@ function findReplace() {
         if ((cell.t !== 's' && cell.t !== 'str') || !cell.v) continue; // skip if cell is not text
 
         let v = cell.v;
-        let regex = new RegExp(oldTxt, 'g');
 
-        if (v.includes(oldTxt)) cell.v = v.replace(regex, newTxt);
+        for (let key in dict) {
+          let oldTxt = key;
+          let newTxt = dict[key];
+          let regex = new RegExp(oldTxt, 'g');
+          if (v.includes(oldTxt)) cell.v = v.replace(regex, newTxt);
+        }
       }
     }
   });
@@ -61,5 +66,5 @@ fs.copyFile(`${inputName}.xlsx`, `${outputName}.xlsx`, (err) => {
   if (err) throw err;
   console.log(`${inputName}.xlsx was copied to ${outputName}.xlsx`);
   readDict();
-  // findReplace();
+  findReplace();
 });

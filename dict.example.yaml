@@ -1,6 +1,6 @@
 ---
-OLD: "NEW"
-"2020": "2021"
-"2020 test": "2021 test"
-test1: "test2"
-test3: "test4"
+OLD: NEW
+2020: 2021
+2020 test: 2021 test
+test1: test2
+test3: test4

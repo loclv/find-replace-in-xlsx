@@ -53,8 +53,6 @@ function findReplace(dict) {
         for (let key in dict) {
           let oldTxt = key.toString();
           let newTxt = dict[key].toString();
-          console.log(oldTxt);
-          console.log(newTxt);
 
           let regex = new RegExp(oldTxt, 'g');
           if (v.includes(oldTxt)) cell.v = v.replace(regex, newTxt);

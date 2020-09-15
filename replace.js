@@ -16,6 +16,7 @@ let workbook = new Excel.Workbook();
 
 function readWrite() {
   workbook.xlsx.readFile(`${inputName}.xlsx`).then(function () {
+    console.log('File is read. Start to replace.');
     workbook.eachSheet(function (worksheet, sheetId) {
       worksheet.eachRow(function (row, rowNumber) {
         row.eachCell(function (cell, colNumber) {

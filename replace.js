@@ -7,7 +7,7 @@ const getDict = require('./src/getDict');
 
 dotenv.config();
 
-const DICT_NAME = process.env.DICT_NAME;
+const dictName = process.env.DICT_NAME;
 const inputName = process.env.INPUT_NAME;
 const outputName = process.env.OUTPUT_NAME;
 
@@ -28,5 +28,5 @@ function findReplace(dict) {
   );
 }
 
-const dict = getDict(DICT_NAME);
+const dict = getDict(dictName);
 findReplace(dict);

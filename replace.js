@@ -4,10 +4,13 @@ const Excel = require('exceljs');
 
 const fs = require('fs');
 
-const oldTxt = 'OLD';
-const newTxt = 'NEW';
-const inputName = 'original';
-const outputName = 'new';
+const dotenv = require('dotenv');
+dotenv.config();
+
+const oldTxt = process.env.OLD_TXT;
+const newTxt = process.env.NEW_TXT;
+const inputName = process.env.INPUT_NAME;
+const outputName = process.env.OUTPUT_NAME;
 
 let workbook = new Excel.Workbook();
 

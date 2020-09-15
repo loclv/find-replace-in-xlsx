@@ -3,13 +3,25 @@
 const XLSX = require('xlsx-style');
 const fs = require('fs');
 const dotenv = require('dotenv');
+const yaml = require('js-yaml');
 
 dotenv.config();
 
-const oldTxt = process.env.OLD_TXT;
-const newTxt = process.env.NEW_TXT;
+const DICT_NAME = process.env.DICT_NAME;
 const inputName = process.env.INPUT_NAME;
 const outputName = process.env.OUTPUT_NAME;
+
+function readDict() {
+  try {
+    let fileContents = fs.readFileSync(`./${DICT_NAME}.yaml`, 'utf8');
+    let data = yaml.load(fileContents);
+
+    console.log(data);
+    console.log(`Read ./${DICT_NAME}.yaml`);
+  } catch (e) {
+    console.log(e);
+  }
+}
 
 function findReplace() {
   /* read the file */
@@ -48,5 +60,6 @@ function findReplace() {
 fs.copyFile(`${inputName}.xlsx`, `${outputName}.xlsx`, (err) => {
   if (err) throw err;
   console.log(`${inputName}.xlsx was copied to ${outputName}.xlsx`);
-  findReplace();
+  readDict();
+  // findReplace();
 });

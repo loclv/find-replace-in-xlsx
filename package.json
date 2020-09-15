@@ -5,6 +5,7 @@
   "license": "MIT",
   "dependencies": {
     "dotenv": "^8.2.0",
+    "js-yaml": "^3.14.0",
     "xlsx-style": "^0.8.13"
   },
   "engines": {

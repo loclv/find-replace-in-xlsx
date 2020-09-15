@@ -1,6 +1,6 @@
 # xlsx-editer
 
-code base is from [here](https://github.com/SheetJS/sheetjs/issues/121#issuecomment-56834484)
+translate by find and replace in `xlsx` file with a `yaml` dictionary
 
 please read `package.json`
 

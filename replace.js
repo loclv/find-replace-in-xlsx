@@ -23,7 +23,7 @@ function findReplace(dict) {
       }
 
       // new.txt will be created or overwritten by default.
-      workbook.toFileAsync(`${outputName}.xlsx`);
+      workbook.toFileAsync(`${inputName}-${outputName}.xlsx`);
     },
   );
 }

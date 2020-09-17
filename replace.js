@@ -1,7 +1,4 @@
-'use strict';
-
 const XLSX = require('xlsx-populate');
-const fs = require('fs');
 const dotenv = require('dotenv');
 const getDict = require('./src/getDict');
 
@@ -12,20 +9,21 @@ const inputName = process.env.INPUT_NAME;
 const outputName = process.env.OUTPUT_NAME;
 
 function findReplace(dict) {
-  const workbook = XLSX.fromFileAsync(`./${inputName}.xlsx`).then(
-    (workbook) => {
-      for (let key in dict) {
-        let oldTxt = key.toString();
-        let newTxt = dict[key].toString();
+  XLSX.fromFileAsync(`./${inputName}.xlsx`).then((workbook) => {
+    const keys = Object.keys(dict);
+    const values = Object.values(dict);
 
-        let regex = new RegExp(oldTxt, 'g');
-        workbook.find(regex, (match) => newTxt);
-      }
+    for (let i = 0; i < keys.length; i += 1) {
+      const oldTxt = keys[i].toString();
+      const newTxt = values[i].toString();
 
-      // new.txt will be created or overwritten by default.
-      workbook.toFileAsync(`${inputName}-${outputName}.xlsx`);
-    },
-  );
+      const regex = new RegExp(oldTxt, 'g');
+      workbook.find(regex, () => newTxt);
+    }
+
+    // new.txt will be created or overwritten by default.
+    workbook.toFileAsync(`${inputName}-${outputName}.xlsx`);
+  });
 }
 
 const dict = getDict(dictName);

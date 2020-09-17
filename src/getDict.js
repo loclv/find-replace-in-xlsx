@@ -1,9 +1,10 @@
+/* eslint-disable no-console */
 const fs = require('fs');
 const yaml = require('js-yaml');
 
 function getDict(DICT_NAME) {
   try {
-    let fileContents = fs.readFileSync(`./${DICT_NAME}.yaml`, 'utf8');
+    const fileContents = fs.readFileSync(`./${DICT_NAME}.yaml`, 'utf8');
     const dict = yaml.load(fileContents);
 
     console.log(dict);
@@ -13,6 +14,7 @@ function getDict(DICT_NAME) {
     return dict;
   } catch (e) {
     console.log(e);
+    return null;
   }
 }
 

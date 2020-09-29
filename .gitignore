@@ -1,4 +1,5 @@
 *.xlsx
+*.xlsx#
 *.xlsm
 node_modules/
 .env
